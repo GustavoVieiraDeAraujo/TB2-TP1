@@ -348,10 +348,10 @@ list<CasoTeste> ComandoPesquisarCasosTesteDoTeste::get_resultado() {
 //Metodos da Classe ComandoPesquisarTestesDoDesenvolvedor
 
 ComandoPesquisarTestesDoDesenvolvedor::ComandoPesquisarTestesDoDesenvolvedor(Matricula matricula) {
-    comando_sql = "SELECT  T.CODIGO, T.CLASSE, T.NOME FROM testes AS T INNER JOIN desenvolvedores AS D"\
+    comando_sql = "SELECT T.CODIGO, T.CLASSE, T.NOME FROM testes AS T INNER JOIN desenvolvedores AS D "\
     "ON T.MATRICULA_CRIADOR = D.MATRICULA WHERE D.MATRICULA = '";
     comando_sql += matricula.get_valor_dominio();
-    comando_sql += "'";
+    comando_sql += "';";
 }
 
 list<Teste> ComandoPesquisarTestesDoDesenvolvedor::get_resultado() {
@@ -386,6 +386,7 @@ list<Teste> ComandoPesquisarTestesDoDesenvolvedor::get_resultado() {
 
         testes_do_desenvolvedor.push_back(teste);
     }
+
     return testes_do_desenvolvedor;
 }
 
@@ -416,6 +417,8 @@ ComandoCadastrarTeste::ComandoCadastrarTeste(Teste teste) {
     comando_sql += teste.get_nome().get_valor_dominio();
     comando_sql += "', '";
     comando_sql += teste.get_classe().get_valor_dominio();
+    comando_sql += "', '";
+    comando_sql += teste.get_matricula_criador().get_valor_dominio();
     comando_sql += "')";
 };
 
@@ -435,6 +438,8 @@ ComandoCadastrarCasoTeste::ComandoCadastrarCasoTeste(CasoTeste caso_teste) {
     comando_sql += caso_teste.get_resultado().get_valor_dominio();
     comando_sql += "', '";
     comando_sql += caso_teste.get_resposta().get_valor_dominio();
+    comando_sql += "', '";
+    comando_sql += caso_teste.get_codigo_teste_associado().get_valor_dominio();
     comando_sql += "')";
 };
 
@@ -448,8 +453,6 @@ ComandoAtualizarDesenvolvedor::ComandoAtualizarDesenvolvedor(Desenvolvedor desen
     comando_sql += "SET nome = '" + desenvolvedor.get_nome().get_valor_dominio();
     comando_sql += "', senha = '" + desenvolvedor.get_senha().get_valor_dominio();
     comando_sql += "', telefone = '" + desenvolvedor.get_telefone().get_valor_dominio();
-
-
 };
 
 //Metodos da Classe ComandoAtualizarTeste

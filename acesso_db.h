@@ -52,7 +52,7 @@ protected:
 
 public:
         bool executar();
-        ComandoSQL() { nome_banco_dados = "banco_de_dados.db"; };
+        ComandoSQL() { nome_banco_dados = "./database/database.db"; };
 };
 
 //------------------------------------ Criar Tabelas ------------------------------------
