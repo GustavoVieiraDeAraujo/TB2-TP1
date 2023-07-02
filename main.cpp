@@ -10,6 +10,7 @@
 #include "./controladoras/servico/desenvolvedor.h"
 
 #include "./acesso_db.h"
+#include <iostream>
 
 using namespace std;
 
@@ -17,7 +18,7 @@ int main() {
 
     Matricula matricula;
     matricula.set_valor_dominio("1234566");
-
+    
     ServicoDesenvolvedor servico_desenvolvedor;
     servico_desenvolvedor.deletar_desenvolvedor(matricula);
 

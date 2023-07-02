@@ -163,14 +163,21 @@ ComandoPesquisarCasoTeste::ComandoPesquisarCasoTeste(Codigo codigo) {
 };
 
 CasoTeste ComandoPesquisarCasoTeste::get_resultado() {
+    Codigo codigo;
     Data data;
     Texto nome;
     Texto acao;
-    Codigo codigo;
     Texto resposta;
-    CasoTeste caso_teste;
     ElementoResultado resultado;
     Resultado resultado_caso_teste;
+    CasoTeste caso_teste;
+
+    // Remover codigo;
+    if (lista_resultado.empty())
+        throw "not found";
+    resultado = lista_resultado.back();
+    lista_resultado.pop_back();
+    codigo.set_valor_dominio(resultado.get_valor_coluna());
 
     // Remover data;
     if (lista_resultado.empty())
@@ -192,13 +199,6 @@ CasoTeste ComandoPesquisarCasoTeste::get_resultado() {
     resultado = lista_resultado.back();
     lista_resultado.pop_back();
     acao.set_valor_dominio(resultado.get_valor_coluna());
-
-    // Remover codigo;
-    if (lista_resultado.empty())
-        throw "not found";
-    resultado = lista_resultado.back();
-    lista_resultado.pop_back();
-    codigo.set_valor_dominio(resultado.get_valor_coluna());
 
     // Remover resposta;
     if (lista_resultado.empty())
@@ -285,7 +285,7 @@ Desenvolvedor ComandoPesquisarDesenvolvedor::get_resultado() {
 //Metodos da Classe ComandoPesquisarCasosTesteDoTeste
 
 ComandoPesquisarCasosTesteDoTeste::ComandoPesquisarCasosTesteDoTeste(Codigo codigo) {
-    comando_sql = "SELECT CT.CODIGO, CT.DATA, CT.NOME, CT.ACAO, CT.RESPOSTA, CT.RESULTADO FROM casos_teste"\
+    comando_sql = "SELECT CT.CODIGO, CT.DATA, CT.NOME, CT.ACAO, CT.RESPOSTA, CT.RESULTADO FROM casos_teste "\
     "AS CT INNER JOIN testes AS T ON CT.CODIGO_TESTE_ASSOCIADO = T.CODIGO WHERE T.CODIGO = '";
     comando_sql += codigo.get_valor_dominio();
     comando_sql += "'";
@@ -435,9 +435,9 @@ ComandoCadastrarCasoTeste::ComandoCadastrarCasoTeste(CasoTeste caso_teste) {
     comando_sql += "', '";
     comando_sql += caso_teste.get_acao().get_valor_dominio();
     comando_sql += "', '";
-    comando_sql += caso_teste.get_resultado().get_valor_dominio();
-    comando_sql += "', '";
     comando_sql += caso_teste.get_resposta().get_valor_dominio();
+    comando_sql += "', '";
+    comando_sql += caso_teste.get_resultado().get_valor_dominio();
     comando_sql += "', '";
     comando_sql += caso_teste.get_codigo_teste_associado().get_valor_dominio();
     comando_sql += "')";
