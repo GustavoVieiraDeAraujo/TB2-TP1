@@ -20,6 +20,16 @@ bool ServicoTeste::atualizar_teste(Teste teste) {
 }
 
 bool ServicoTeste::deletar_teste(Codigo codigo) {
+    ComandoPesquisarCasosTesteDoTeste pesquisar_casos_teste_do_teste(codigo);
+    pesquisar_casos_teste_do_teste.executar();
+    list<CasoTeste> casos_teste_para_deletar;
+    casos_teste_para_deletar = pesquisar_casos_teste_do_teste.get_resultado();
+
+    for (CasoTeste caso_teste : casos_teste_para_deletar){
+        ComandoDeletarCasoTeste deletar_caso_teste(caso_teste.get_codigo());
+        deletar_caso_teste.executar();
+    }
+
     ComandoDeletarTeste deletar_teste(codigo);
-    return deletar_teste.executar();
+    deletar_teste.executar();
 };

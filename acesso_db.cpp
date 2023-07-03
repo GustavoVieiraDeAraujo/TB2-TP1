@@ -379,7 +379,6 @@ list<Teste> ComandoPesquisarTestesDoDesenvolvedor::get_resultado() {
 
        	nome.set_valor_dominio(resultado.get_valor_coluna());
 
-  
         teste.set_codigo(codigo);
         teste.set_classe(classe);
         teste.set_nome(nome);

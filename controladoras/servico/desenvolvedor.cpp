@@ -1,6 +1,5 @@
 #include "./desenvolvedor.h"
 #include "../../acesso_db.h"
-#include <iostream>
 
 bool ServicoDesenvolvedor::criar_desenvolvedor(Desenvolvedor desenvolvedor) {
     ComandoCadastrarDesenvolvedor cadastrar_desenvolvedor(desenvolvedor);
@@ -32,7 +31,7 @@ bool ServicoDesenvolvedor::deletar_desenvolvedor(Matricula matricula) {
             list<CasoTeste> casos_teste_para_deletar;
             casos_teste_para_deletar = pesquisar_casos_teste_do_teste.get_resultado();
 
-            for (CasoTeste caso_teste: casos_teste_para_deletar){
+            for (CasoTeste caso_teste : casos_teste_para_deletar){
                 ComandoDeletarCasoTeste deletar_caso_teste(caso_teste.get_codigo());
                 deletar_caso_teste.executar();
             }
@@ -44,5 +43,3 @@ bool ServicoDesenvolvedor::deletar_desenvolvedor(Matricula matricula) {
     ComandoDeletarDesenvolvedor deletar_desenvolvedor(matricula);
     return deletar_desenvolvedor.executar();
 }
-
-
